@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:warikan/src/features/home/payment_list.dart';
+import 'package:warikan/src/shared/providers/groups.dart';
 import 'package:warikan/src/shared/views/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,26 +12,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  GroupsProvider _groupsProvider = GroupsProvider();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: _groupsProvider.groups.length,
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Page1'),
-              Tab(text: 'Page2'),
-              Tab(text: 'Page3'),
-            ],
+          bottom: TabBar(
+            tabs: _groupsProvider.groups
+                .map((group) => Tab(text: group.name))
+                .toList(),
           ),
         ),
         body: const TabBarView(
           children: [
             PaymentList(),
-            Text('Page2'),
-            Text('Page3'),
+            PaymentList(),
+            PaymentList(),
           ],
         ),
         floatingActionButton: FloatingActionButton(
