@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warikan/src/features/home/payment_list.dart';
 import 'package:warikan/src/shared/views/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: const TabBarView(
           children: [
-            Text('page1'),
+            PaymentList(),
             Text('Page2'),
             Text('Page3'),
           ],
