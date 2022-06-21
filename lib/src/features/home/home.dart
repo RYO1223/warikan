@@ -24,9 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
             tabs: _groupsProvider.groups
                 .map((group) => Tab(text: group.name))
                 .toList()
-              ..add(
-                const Tab(child: Text('+', style: TextStyle(fontSize: 20))),
-              ),
+              ..add(const Tab(icon: Icon(Icons.add))),
             isScrollable: true,
           ),
         ),
