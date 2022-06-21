@@ -1,6 +1,8 @@
 import 'package:warikan/src/shared/classes/group.dart';
 
 class GroupsProvider {
+  static GroupsProvider get shared => GroupsProvider();
+
   List<Group> get groups => const [
         Group(
           id: 1,
@@ -15,4 +17,8 @@ class GroupsProvider {
           name: 'group3',
         ),
       ];
+
+  Group getGroup(int id) {
+    return groups.firstWhere((group) => group.id == id);
+  }
 }

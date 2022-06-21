@@ -26,12 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 .toList(),
           ),
         ),
-        body: const TabBarView(
-          children: [
-            PaymentList(),
-            PaymentList(),
-            PaymentList(),
-          ],
+        body: TabBarView(
+          children: _groupsProvider.groups
+              .map((group) => PaymentList(group: group))
+              .toList(),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => {},
