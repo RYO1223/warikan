@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:warikan/src/features/add_payment/add_payment.dart';
 import 'package:warikan/src/features/home/home.dart';
 
 void main() {
@@ -15,7 +16,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const HomeScreen(title: 'HomeScreen'),
+      home: const HomeScreen(),
+      routes: {
+        '/home': (BuildContext context) => const HomeScreen(),
+        '/add_payment': (BuildContext context) => const AddPayment(),
+      },
     );
   }
 }

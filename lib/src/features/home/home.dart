@@ -4,8 +4,7 @@ import 'package:warikan/src/shared/providers/groups.dart';
 import 'package:warikan/src/shared/views/drawer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -19,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
       length: _groupsProvider.groups.length + 1,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: const Text('HomeScreen'),
           bottom: TabBar(
             tabs: _groupsProvider.groups
                 .map((group) => Tab(text: group.name))
@@ -35,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ..add(const Text('')),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => {},
+          onPressed: () => {Navigator.of(context).pushNamed('/add_payment')},
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),
