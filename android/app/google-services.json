@@ -40,42 +40,6 @@
           ]
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:530343613314:android:c2a88ef1d0138e3ec8f59b",
-        "android_client_info": {
-          "package_name": "com.kuwanoya.warikan"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "530343613314-j4uke7lcpr23g7u5p12t7jb10mi361nc.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB5ZnI2RXQ8pL2I6GloFrvILvQa5AYbKXU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "530343613314-j4uke7lcpr23g7u5p12t7jb10mi361nc.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "530343613314-43ibs01gmflp9dj8e2h3q18npnn55dhf.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.warikan"
-              }
-            }
-          ]
-        }
-      }
     }
   ],
   "configuration_version": "1"
