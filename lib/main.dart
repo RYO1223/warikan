@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:warikan/src/features/add_payment/add_payment.dart';
-import 'package:warikan/src/features/home/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:warikan/src/ui/routes/app_route.gr.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -12,24 +11,23 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const HomeScreen(),
-      routes: {
-        '/home': (BuildContext context) => const HomeScreen(),
-        '/add_payment': (BuildContext context) => const AddPayment(),
-      },
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }

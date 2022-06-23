@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class AddPayment extends StatefulWidget {
-  const AddPayment({Key? key}) : super(key: key);
+class AddPaymentPage extends StatefulWidget {
+  const AddPaymentPage({Key? key}) : super(key: key);
 
   @override
-  State<AddPayment> createState() => _AddPaymentState();
+  State<AddPaymentPage> createState() => _AddPaymentPageState();
 }
 
-class _AddPaymentState extends State<AddPayment> {
+class _AddPaymentPageState extends State<AddPaymentPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
