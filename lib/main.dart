@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:warikan/src/ui/routes/app_route.gr.dart';
+import 'package:warikan/ui/routes/app_route.gr.dart';
 import 'firebase_options.dart';
 
 void main() async {
