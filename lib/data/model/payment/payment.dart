@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:warikan/data/model/group/group.dart';
 
 part 'payment.freezed.dart';
+part 'payment.g.dart';
 
 @freezed
 class Payment with _$Payment {
