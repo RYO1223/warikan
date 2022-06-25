@@ -1,5 +1,6 @@
-import 'package:warikan/data/model/result/result.dart';
+import 'package:warikan/data/model/group/group.dart';
 
 abstract class GroupsRepository {
-  Future<Result<int>> fetch();
+  Future<List<Group>> fetch();
+  Future<List<Group>> fetchWithPayments();
 }

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeState {
-  int get count => throw _privateConstructorUsedError;
+  List<Group> get groups => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -27,7 +27,7 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({int count});
+  $Res call({List<Group> groups});
 }
 
 /// @nodoc
@@ -40,13 +40,13 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? count = freezed,
+    Object? groups = freezed,
   }) {
     return _then(_value.copyWith(
-      count: count == freezed
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      groups: groups == freezed
+          ? _value.groups
+          : groups // ignore: cast_nullable_to_non_nullable
+              as List<Group>,
     ));
   }
 }
@@ -57,7 +57,7 @@ abstract class _$$_HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
           _$_HomeState value, $Res Function(_$_HomeState) then) =
       __$$_HomeStateCopyWithImpl<$Res>;
   @override
-  $Res call({int count});
+  $Res call({List<Group> groups});
 }
 
 /// @nodoc
@@ -72,13 +72,13 @@ class __$$_HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? count = freezed,
+    Object? groups = freezed,
   }) {
     return _then(_$_HomeState(
-      count: count == freezed
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
+      groups: groups == freezed
+          ? _value._groups
+          : groups // ignore: cast_nullable_to_non_nullable
+              as List<Group>,
     ));
   }
 }
@@ -86,15 +86,19 @@ class __$$_HomeStateCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_HomeState implements _HomeState {
-  const _$_HomeState({this.count = 0});
+  const _$_HomeState({final List<Group> groups = const []}) : _groups = groups;
 
+  final List<Group> _groups;
   @override
   @JsonKey()
-  final int count;
+  List<Group> get groups {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_groups);
+  }
 
   @override
   String toString() {
-    return 'HomeState(count: $count)';
+    return 'HomeState(groups: $groups)';
   }
 
   @override
@@ -102,12 +106,12 @@ class _$_HomeState implements _HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HomeState &&
-            const DeepCollectionEquality().equals(other.count, count));
+            const DeepCollectionEquality().equals(other._groups, _groups));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(count));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_groups));
 
   @JsonKey(ignore: true)
   @override
@@ -116,10 +120,10 @@ class _$_HomeState implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({final int count}) = _$_HomeState;
+  const factory _HomeState({final List<Group> groups}) = _$_HomeState;
 
   @override
-  int get count => throw _privateConstructorUsedError;
+  List<Group> get groups => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_HomeStateCopyWith<_$_HomeState> get copyWith =>
