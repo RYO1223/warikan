@@ -19,8 +19,11 @@ class PaymentsRepositoryProviderImpl implements PaymentsRepository {
         .doc(group.id)
         .collection('payments')
         .withConverter<Payment>(
-          fromFirestore: (snapshot, _) =>
-              Payment.fromJson(snapshot.data()!..['id'] = snapshot.id),
+          fromFirestore: (snapshot, _) => Payment.fromJson(
+            snapshot.data()!
+              ..['id'] = snapshot.id
+              ..['group'] = group.toJson(),
+          ),
           toFirestore: (model, _) => model.toJson(),
         );
   }
