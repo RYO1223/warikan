@@ -4,6 +4,7 @@ import 'package:warikan/data/model/group/group.dart';
 import 'package:warikan/data/repository/groups/groups_repository.dart';
 import 'package:warikan/data/repository/payments/payments_repository.dart';
 import 'package:warikan/data/repository/payments/payments_repository_impl.dart';
+import 'package:warikan/extensions/firestore_converters.dart';
 
 final groupsRepositoryProvider =
     Provider<GroupsRepository>((ref) => GroupsRepositoryImpl(ref: ref));
@@ -14,11 +15,7 @@ class GroupsRepositoryImpl implements GroupsRepository {
   final ProviderRef<GroupsRepository> ref;
 
   final groupsRef =
-      FirebaseFirestore.instance.collection('groups').withConverter<Group>(
-            fromFirestore: (snapshot, _) =>
-                Group.fromJson(snapshot.data()!..['id'] = snapshot.id),
-            toFirestore: (model, _) => model.toJson(),
-          );
+      FirebaseFirestore.instance.collection('groups').withGroupConverter();
 
   @override
   Future<List<Group>> fetch() async {

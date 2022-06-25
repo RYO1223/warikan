@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:warikan/data/model/group/group.dart';
 import 'package:warikan/data/model/payment/payment.dart';
 import 'package:warikan/data/repository/payments/payments_repository.dart';
+import 'package:warikan/extensions/firestore_converters.dart';
 
 final paymentsRepositoryProvider = Provider<PaymentsRepositoryProviderImpl>(
     (ref) => PaymentsRepositoryProviderImpl(ref: ref));
@@ -18,14 +19,7 @@ class PaymentsRepositoryProviderImpl implements PaymentsRepository {
         .collection('groups')
         .doc(group.id)
         .collection('payments')
-        .withConverter<Payment>(
-          fromFirestore: (snapshot, _) => Payment.fromJson(
-            snapshot.data()!
-              ..['id'] = snapshot.id
-              ..['group'] = group.toJson(),
-          ),
-          toFirestore: (model, _) => model.toJson(),
-        );
+        .withPaymentConverter(group);
   }
 
   @override
