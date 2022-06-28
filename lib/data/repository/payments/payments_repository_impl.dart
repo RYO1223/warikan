@@ -28,4 +28,9 @@ class PaymentsRepositoryProviderImpl implements PaymentsRepository {
       return payments.docs.map((doc) => doc.data()).toList();
     });
   }
+
+  @override
+  Future addPayment(Payment payment) async {
+    getPaymentsRef(payment.group).add(payment);
+  }
 }

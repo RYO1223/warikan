@@ -19,7 +19,8 @@ extension FirestoreConverterExt on CollectionReference {
           ..['id'] = snapshot.id
           ..['group'] = group.toJson(),
       ),
-      toFirestore: (model, _) => model.toJson(),
+      toFirestore: (model, _) => model.toJson()
+        ..removeWhere((key, value) => ['id', 'group'].contains(key)),
     );
   }
 }

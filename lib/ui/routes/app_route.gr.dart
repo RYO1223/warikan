@@ -13,6 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:flutter/material.dart' as _i4;
 
+import '../../data/model/group/group.dart' as _i5;
 import '../add_payment/add_payment_page.dart' as _i2;
 import '../home/home_page.dart' as _i1;
 
@@ -27,8 +28,10 @@ class AppRouter extends _i3.RootStackRouter {
           routeData: routeData, child: const _i1.HomePage());
     },
     AddPaymentRoute.name: (routeData) {
+      final args = routeData.argsAs<AddPaymentRouteArgs>();
       return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i2.AddPaymentPage());
+          routeData: routeData,
+          child: _i2.AddPaymentPage(key: args.key, group: args.group));
     }
   };
 
@@ -49,9 +52,24 @@ class HomeRoute extends _i3.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AddPaymentPage]
-class AddPaymentRoute extends _i3.PageRouteInfo<void> {
-  const AddPaymentRoute()
-      : super(AddPaymentRoute.name, path: '/add-payment-page');
+class AddPaymentRoute extends _i3.PageRouteInfo<AddPaymentRouteArgs> {
+  AddPaymentRoute({_i4.Key? key, required _i5.Group group})
+      : super(AddPaymentRoute.name,
+            path: '/add-payment-page',
+            args: AddPaymentRouteArgs(key: key, group: group));
 
   static const String name = 'AddPaymentRoute';
+}
+
+class AddPaymentRouteArgs {
+  const AddPaymentRouteArgs({this.key, required this.group});
+
+  final _i4.Key? key;
+
+  final _i5.Group group;
+
+  @override
+  String toString() {
+    return 'AddPaymentRouteArgs{key: $key, group: $group}';
+  }
 }
