@@ -15,5 +15,6 @@
     "Firestore",
     "riverpod",
     "warikan"
-  ]
+  ],
+  "git.autoRepositoryDetection": false
 }
