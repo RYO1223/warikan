@@ -1,60 +1,55 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:warikan/ui/add_payment/add_payment_view_model.dart';
 
-class AddPaymentPage extends StatefulWidget {
+class AddPaymentPage extends HookConsumerWidget {
   const AddPaymentPage({Key? key}) : super(key: key);
 
   @override
-  State<AddPaymentPage> createState() => _AddPaymentPageState();
-}
+  Widget build(context, ref) {
+    final router = AutoRouter.of(context);
 
-class _AddPaymentPageState extends State<AddPaymentPage> {
-  final _formKey = GlobalKey<FormState>();
+    final state = ref.watch(addPaymentViewModelProvider);
+    final viewModel = ref.watch(addPaymentViewModelProvider.notifier);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add payment'),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(labelText: '名前'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '名前をつけてください';
-                }
-                return null;
-              },
+    final formKey = GlobalKey<FormState>();
+
+    return state.when(
+      error: (e, msg) => Text(e.toString()),
+      loading: () {
+        return const Scaffold(
+            body: SafeArea(child: Center(child: CircularProgressIndicator())));
+      },
+      data: (data) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Add payment'),
+          ),
+          body: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: TextEditingController(text: data.name),
+                  decoration: const InputDecoration(labelText: '名前'),
+                  validator: viewModel.nameValidator,
+                ),
+                TextFormField(
+                  controller: TextEditingController(text: data.price),
+                  decoration: const InputDecoration(labelText: '金額'),
+                  keyboardType: TextInputType.number,
+                  validator: viewModel.priceValidator,
+                ),
+                ElevatedButton(
+                  onPressed: () => viewModel.onSendPressed(formKey, router),
+                  child: const Text('送信'),
+                ),
+              ],
             ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: '金額'),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '金額を入力してください';
-                }
-                if (int.tryParse(value) == null) {
-                  return '数字のみで入力してください';
-                }
-                return null;
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Navigator.of(context).pop();
-                }
-              },
-              child: const Text('確定'),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
