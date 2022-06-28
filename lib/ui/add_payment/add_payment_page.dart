@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:warikan/data/model/group/group.dart';
+import 'package:warikan/data/model/payment/payment.dart';
 import 'package:warikan/ui/add_payment/add_payment_view_model.dart';
 
 class AddPaymentPage extends HookConsumerWidget {
-  const AddPaymentPage({Key? key, required this.group}) : super(key: key);
+  const AddPaymentPage({
+    Key? key,
+    required this.group,
+    required this.addPaymentToHomeState,
+  }) : super(key: key);
 
   final Group group;
+  final void Function(Payment payment) addPaymentToHomeState;
 
   @override
   Widget build(context, ref) {
@@ -56,6 +62,7 @@ class AddPaymentPage extends HookConsumerWidget {
                     group: group,
                     name: nameController.text,
                     price: priceController.text,
+                    addPaymentToHomeState: addPaymentToHomeState,
                   ),
                   child: const Text('送信'),
                 ),

@@ -30,7 +30,10 @@ class PaymentsRepositoryProviderImpl implements PaymentsRepository {
   }
 
   @override
-  Future addPayment(Payment payment) async {
-    getPaymentsRef(payment.group).add(payment);
+  Future<Payment> addPayment(Payment payment) async {
+    return getPaymentsRef(payment.group.copyWith(payments: []))
+        .add(payment)
+        .then((value) => value.get())
+        .then((value) => value.data()!);
   }
 }
