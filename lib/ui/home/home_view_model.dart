@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:warikan/data/repository/groups/groups_repository.dart';
 import 'package:warikan/data/repository/groups/groups_repository_impl.dart';
@@ -21,5 +22,9 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
   Future<void> load() async {
     final groups = await groupsRepository.fetchWithPayments();
     state = AsyncValue.data(HomeState(groups: groups));
+  }
+
+  void onFloatingActionButtonPressed(StackRouter router) {
+    router.navigateNamed('/add-payment-page');
   }
 }

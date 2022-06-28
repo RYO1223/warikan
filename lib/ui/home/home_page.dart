@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:warikan/ui/home/home_view_model.dart';
@@ -9,7 +10,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final router = AutoRouter.of(context);
     final state = ref.watch(homeViewModelProvider);
+    final viewModel = ref.watch(homeViewModelProvider.notifier);
 
     return state.when(
       error: (e, msg) => Text(e.toString()),
@@ -36,9 +39,7 @@ class HomePage extends ConsumerWidget {
                 ..add(const Text('')),
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () =>
-                  {Navigator.of(context).pushNamed('/add_payment')},
-              tooltip: 'Increment',
+              onPressed: () => viewModel.onFloatingActionButtonPressed(router),
               child: const Icon(Icons.add),
             ),
             drawer: const MyDrawer(),
