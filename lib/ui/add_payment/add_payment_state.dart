@@ -7,5 +7,6 @@ class AddPaymentState with _$AddPaymentState {
   const factory AddPaymentState({
     @Default('') String name,
     @Default('') String price,
+    @Default(false) bool sending,
   }) = _AddPaymentState;
 }

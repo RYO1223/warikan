@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AddPaymentState {
   String get name => throw _privateConstructorUsedError;
   String get price => throw _privateConstructorUsedError;
+  bool get sending => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddPaymentStateCopyWith<AddPaymentState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $AddPaymentStateCopyWith<$Res> {
   factory $AddPaymentStateCopyWith(
           AddPaymentState value, $Res Function(AddPaymentState) then) =
       _$AddPaymentStateCopyWithImpl<$Res>;
-  $Res call({String name, String price});
+  $Res call({String name, String price, bool sending});
 }
 
 /// @nodoc
@@ -45,6 +46,7 @@ class _$AddPaymentStateCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? price = freezed,
+    Object? sending = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -55,6 +57,10 @@ class _$AddPaymentStateCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
+      sending: sending == freezed
+          ? _value.sending
+          : sending // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -66,7 +72,7 @@ abstract class _$$_AddPaymentStateCopyWith<$Res>
           _$_AddPaymentState value, $Res Function(_$_AddPaymentState) then) =
       __$$_AddPaymentStateCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String price});
+  $Res call({String name, String price, bool sending});
 }
 
 /// @nodoc
@@ -84,6 +90,7 @@ class __$$_AddPaymentStateCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? price = freezed,
+    Object? sending = freezed,
   }) {
     return _then(_$_AddPaymentState(
       name: name == freezed
@@ -94,6 +101,10 @@ class __$$_AddPaymentStateCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
+      sending: sending == freezed
+          ? _value.sending
+          : sending // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -101,7 +112,8 @@ class __$$_AddPaymentStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AddPaymentState implements _AddPaymentState {
-  const _$_AddPaymentState({this.name = '', this.price = ''});
+  const _$_AddPaymentState(
+      {this.name = '', this.price = '', this.sending = false});
 
   @override
   @JsonKey()
@@ -109,10 +121,13 @@ class _$_AddPaymentState implements _AddPaymentState {
   @override
   @JsonKey()
   final String price;
+  @override
+  @JsonKey()
+  final bool sending;
 
   @override
   String toString() {
-    return 'AddPaymentState(name: $name, price: $price)';
+    return 'AddPaymentState(name: $name, price: $price, sending: $sending)';
   }
 
   @override
@@ -121,14 +136,16 @@ class _$_AddPaymentState implements _AddPaymentState {
         (other.runtimeType == runtimeType &&
             other is _$_AddPaymentState &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.price, price));
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.sending, sending));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(price));
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(sending));
 
   @JsonKey(ignore: true)
   @override
@@ -137,13 +154,17 @@ class _$_AddPaymentState implements _AddPaymentState {
 }
 
 abstract class _AddPaymentState implements AddPaymentState {
-  const factory _AddPaymentState({final String name, final String price}) =
-      _$_AddPaymentState;
+  const factory _AddPaymentState(
+      {final String name,
+      final String price,
+      final bool sending}) = _$_AddPaymentState;
 
   @override
   String get name => throw _privateConstructorUsedError;
   @override
   String get price => throw _privateConstructorUsedError;
+  @override
+  bool get sending => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_AddPaymentStateCopyWith<_$_AddPaymentState> get copyWith =>

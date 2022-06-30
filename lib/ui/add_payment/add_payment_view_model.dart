@@ -7,26 +7,28 @@ import 'package:warikan/data/repository/payments/payments_repository_impl.dart';
 import 'package:warikan/ui/add_payment/add_payment_state.dart';
 
 final addPaymentViewModelProvider =
-    StateNotifierProvider<AddPaymentViewModel, AsyncValue<AddPaymentState>>(
+    StateNotifierProvider<AddPaymentViewModel, AddPaymentState>(
   (ref) => AddPaymentViewModel(ref: ref),
 );
 
-class AddPaymentViewModel extends StateNotifier<AsyncValue<AddPaymentState>> {
-  AddPaymentViewModel({required this.ref})
-      : super(const AsyncValue.data(AddPaymentState()));
+class AddPaymentViewModel extends StateNotifier<AddPaymentState> {
+  AddPaymentViewModel({required this.ref}) : super(const AddPaymentState());
 
-  final StateNotifierProviderRef<AddPaymentViewModel,
-      AsyncValue<AddPaymentState>> ref;
+  final StateNotifierProviderRef<AddPaymentViewModel, AddPaymentState> ref;
+
+  void setName(String name) {
+    state = state.copyWith(name: name);
+  }
+
+  void setPrice(String price) {
+    state = state.copyWith(price: price);
+  }
 
   String? nameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return '名前をつけてください';
     }
     return null;
-  }
-
-  void onNameChanged(String name) {
-    state = AsyncValue.data(state.value!.copyWith(name: name));
   }
 
   String? priceValidator(String? value) {
@@ -39,34 +41,25 @@ class AddPaymentViewModel extends StateNotifier<AsyncValue<AddPaymentState>> {
     return null;
   }
 
-  void onPriceChanged(String price) {
-    state = AsyncValue.data(state.value!.copyWith(price: price));
-  }
-
   void onSendPressed({
     required GlobalKey<FormState> formKey,
     required StackRouter router,
     required Group group,
-    required String name,
-    required String price,
   }) async {
     if (formKey.currentState!.validate()) {
-      state.when(
-        loading: () {},
-        error: (_, __) {},
-        data: (data) {
-          final payment = Payment(
-            id: '',
-            group: group,
-            name: name,
-            price: int.parse(price),
-          );
-          final paymentsRepository = ref.watch(paymentsRepositoryProvider);
-          paymentsRepository.addPayment(payment).then((data) {
-            router.pop<Payment>(data);
-          });
-        },
+      state = state.copyWith(sending: true);
+      final payment = Payment(
+        id: '',
+        group: group,
+        name: state.name,
+        price: int.parse(state.price),
       );
+      final paymentsRepository = ref.watch(paymentsRepositoryProvider);
+      paymentsRepository.addPayment(payment).then((data) {
+        router.pop<Payment>(data);
+      }).whenComplete(() {
+        state = state.copyWith(sending: false);
+      });
     }
   }
 }
