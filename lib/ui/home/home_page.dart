@@ -63,6 +63,7 @@ class PaymentList extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
+    final viewModel = ref.watch(homeViewModelProvider.notifier);
     return ListView.separated(
       itemCount: group.payments.length,
       itemBuilder: (context, index) {
@@ -70,6 +71,10 @@ class PaymentList extends ConsumerWidget {
         return ListTile(
           title: Text(payment.name),
           subtitle: Text(payment.price.toString()),
+          onTap: () => viewModel.onPaymentTap(
+            context: context,
+            originalPayment: payment,
+          ),
         );
       },
       separatorBuilder: (context, index) => const Divider(color: Colors.grey),

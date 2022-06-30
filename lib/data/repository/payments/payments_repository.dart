@@ -6,4 +6,5 @@ abstract class PaymentsRepository {
   CollectionReference<Payment> getPaymentsRef(Group group);
   Future<List<Payment>> fetch(Group group);
   Future addPayment(Payment payment);
+  Future editPayment(Payment payment);
 }

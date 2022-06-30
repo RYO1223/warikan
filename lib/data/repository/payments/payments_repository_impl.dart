@@ -36,4 +36,11 @@ class PaymentsRepositoryProviderImpl implements PaymentsRepository {
         .then((value) => value.get())
         .then((value) => value.data()!);
   }
+
+  @override
+  Future<void> editPayment(Payment payment) async {
+    return getPaymentsRef(payment.group.copyWith(payments: []))
+        .doc(payment.id)
+        .set(payment);
+  }
 }

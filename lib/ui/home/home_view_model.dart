@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:warikan/data/model/group/group.dart';
 import 'package:warikan/data/model/payment/payment.dart';
@@ -38,5 +39,25 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
     }).toList();
 
     state = AsyncValue.data(HomeState(groups: groups));
+  }
+
+  void onPaymentTap({
+    required BuildContext context,
+    required Payment originalPayment,
+  }) async {
+    final router = AutoRouter.of(context);
+    final newPayment =
+        await router.push<Payment>(EditPaymentRoute(payment: originalPayment));
+    if (newPayment == null) return;
+
+    final newGroups = state.value!.groups.map((group) {
+      return group.copyWith(
+        payments: group.payments.map((payment) {
+          if (payment.id != originalPayment.id) return payment;
+          return newPayment;
+        }).toList(),
+      );
+    }).toList();
+    state = AsyncValue.data(HomeState(groups: newGroups));
   }
 }
