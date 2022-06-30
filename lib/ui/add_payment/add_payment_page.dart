@@ -57,8 +57,8 @@ class AddPaymentPage extends HookConsumerWidget {
                   ),
                   ElevatedButton(
                     onPressed: () => viewModel.onSendPressed(
+                      context: context,
                       formKey: formKey,
-                      router: router,
                       group: group,
                     ),
                     child: const Text('送信'),

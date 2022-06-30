@@ -42,11 +42,13 @@ class AddPaymentViewModel extends StateNotifier<AddPaymentState> {
   }
 
   void onSendPressed({
+    required BuildContext context,
     required GlobalKey<FormState> formKey,
-    required StackRouter router,
     required Group group,
   }) async {
     if (formKey.currentState!.validate()) {
+      final router = AutoRouter.of(context);
+
       state = state.copyWith(sending: true);
       final payment = Payment(
         id: '',
@@ -55,8 +57,27 @@ class AddPaymentViewModel extends StateNotifier<AddPaymentState> {
         price: int.parse(state.price),
       );
       final paymentsRepository = ref.watch(paymentsRepositoryProvider);
+
       paymentsRepository.addPayment(payment).then((data) {
         router.pop<Payment>(data);
+      }).catchError((error) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('エラーが発生しました'),
+            content: Text(error.toString()),
+            actions: [
+              TextButton(
+                child: const Text('エラーを報告'),
+                onPressed: () {},
+              ),
+              TextButton(
+                child: const Text('戻る'),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        );
       }).whenComplete(() {
         state = state.copyWith(sending: false);
       });
