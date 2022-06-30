@@ -63,13 +63,16 @@ class PaymentList extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    return ListView(
-      children: group.payments.map((payment) {
+    return ListView.separated(
+      itemCount: group.payments.length,
+      itemBuilder: (context, index) {
+        final payment = group.payments[index];
         return ListTile(
           title: Text(payment.name),
           subtitle: Text(payment.price.toString()),
         );
-      }).toList(),
+      },
+      separatorBuilder: (context, index) => const Divider(color: Colors.grey),
     );
   }
 }
