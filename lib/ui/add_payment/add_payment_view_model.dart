@@ -5,6 +5,7 @@ import 'package:warikan/data/model/group/group.dart';
 import 'package:warikan/data/model/payment/payment.dart';
 import 'package:warikan/data/repository/payments/payments_repository_impl.dart';
 import 'package:warikan/ui/add_payment/add_payment_state.dart';
+import 'package:warikan/ui/shared/error_dialog.dart';
 
 final addPaymentViewModelProvider =
     StateNotifierProvider<AddPaymentViewModel, AddPaymentState>(
@@ -63,20 +64,7 @@ class AddPaymentViewModel extends StateNotifier<AddPaymentState> {
       }).catchError((error) {
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('エラーが発生しました'),
-            content: Text(error.toString()),
-            actions: [
-              TextButton(
-                child: const Text('エラーを報告'),
-                onPressed: () {},
-              ),
-              TextButton(
-                child: const Text('戻る'),
-                onPressed: () {},
-              ),
-            ],
-          ),
+          builder: (context) => ErrorDialog(error: error),
         );
       }).whenComplete(() {
         state = state.copyWith(sending: false);
