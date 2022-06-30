@@ -109,12 +109,13 @@ class __$$_GroupCopyWithImpl<$Res> extends _$GroupCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Group implements _Group {
+class _$_Group extends _Group {
   const _$_Group(
       {required this.id,
       required this.name,
       final List<Payment> payments = const []})
-      : _payments = payments;
+      : _payments = payments,
+        super._();
 
   factory _$_Group.fromJson(Map<String, dynamic> json) =>
       _$$_GroupFromJson(json);
@@ -165,11 +166,12 @@ class _$_Group implements _Group {
   }
 }
 
-abstract class _Group implements Group {
+abstract class _Group extends Group {
   const factory _Group(
       {required final String id,
       required final String name,
       final List<Payment> payments}) = _$_Group;
+  const _Group._() : super._();
 
   factory _Group.fromJson(Map<String, dynamic> json) = _$_Group.fromJson;
 

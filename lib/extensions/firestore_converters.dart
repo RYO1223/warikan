@@ -5,22 +5,15 @@ import 'package:warikan/data/model/payment/payment.dart';
 extension FirestoreConverterExt on CollectionReference {
   CollectionReference<Group> withGroupConverter() {
     return withConverter<Group>(
-      fromFirestore: (snapshot, _) => Group.fromJson(
-        snapshot.data()!..['id'] = snapshot.id,
-      ),
-      toFirestore: (model, _) => model.toJson(),
+      fromFirestore: Group.fromFirestore,
+      toFirestore: (model, options) => model.toFireStore(options),
     );
   }
 
   CollectionReference<Payment> withPaymentConverter(Group group) {
     return withConverter<Payment>(
-      fromFirestore: (snapshot, _) => Payment.fromJson(
-        snapshot.data()!
-          ..['id'] = snapshot.id
-          ..['group'] = group.toJson(),
-      ),
-      toFirestore: (model, _) => model.toJson()
-        ..removeWhere((key, value) => ['id', 'group'].contains(key)),
-    );
+        fromFirestore: (snapshot, options) =>
+            Payment.fromFireStore(snapshot, options, group),
+        toFirestore: (model, options) => model.toFirestore(options));
   }
 }

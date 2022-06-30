@@ -134,12 +134,13 @@ class __$$_$paymentCopyWithImpl<$Res> extends _$PaymentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_$payment implements _$payment {
+class _$_$payment extends _$payment {
   const _$_$payment(
       {required this.id,
       required this.group,
       required this.name,
-      required this.price});
+      required this.price})
+      : super._();
 
   factory _$_$payment.fromJson(Map<String, dynamic> json) =>
       _$$_$paymentFromJson(json);
@@ -189,12 +190,13 @@ class _$_$payment implements _$payment {
   }
 }
 
-abstract class _$payment implements Payment {
+abstract class _$payment extends Payment {
   const factory _$payment(
       {required final String id,
       required final Group group,
       required final String name,
       required final int price}) = _$_$payment;
+  const _$payment._() : super._();
 
   factory _$payment.fromJson(Map<String, dynamic> json) = _$_$payment.fromJson;
 
