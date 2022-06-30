@@ -49,7 +49,6 @@ class AddPaymentViewModel extends StateNotifier<AsyncValue<AddPaymentState>> {
     required Group group,
     required String name,
     required String price,
-    required void Function(Payment payment) addPaymentToHomeState,
   }) async {
     if (formKey.currentState!.validate()) {
       state.when(
@@ -64,8 +63,7 @@ class AddPaymentViewModel extends StateNotifier<AsyncValue<AddPaymentState>> {
           );
           final paymentsRepository = ref.watch(paymentsRepositoryProvider);
           paymentsRepository.addPayment(payment).then((data) {
-            addPaymentToHomeState(payment);
-            router.pop();
+            router.pop<Payment>(data);
           });
         },
       );

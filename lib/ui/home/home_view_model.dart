@@ -28,14 +28,10 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
   }
 
   void onFloatingActionButtonPressed(
-      {required StackRouter router, required Group group}) {
-    router.navigate(AddPaymentRoute(
-      group: group,
-      addPaymentToHomeState: addPaymentToHomeState,
-    ));
-  }
+      {required StackRouter router, required Group group}) async {
+    final payment = await router.push<Payment>(AddPaymentRoute(group: group));
+    if (payment == null) return;
 
-  void addPaymentToHomeState(Payment payment) {
     final groups = state.value!.groups.map((group) {
       if (group.id != payment.group.id) return group;
       return group.copyWith(payments: group.payments.toList()..add(payment));
