@@ -18,7 +18,7 @@ class EditPaymentPage extends HookConsumerWidget {
     final router = AutoRouter.of(context);
 
     final sending = ref.watch(
-        editPaymentViewModelProvider(payment).select((value) => value.sending));
+        editPaymentViewModelProvider(payment).select((value) => value.loading));
     final viewModel = ref.watch(editPaymentViewModelProvider(payment).notifier);
 
     final formKey = GlobalKey<FormState>();
@@ -40,6 +40,19 @@ class EditPaymentPage extends HookConsumerWidget {
         : Scaffold(
             appBar: AppBar(
               title: const Text('Edit payment'),
+              actions: [
+                PopupMenuButton(itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      onTap: () => viewModel.onDeleteTap(
+                        context: context,
+                        payment: payment,
+                      ),
+                      child: const Text('削除'),
+                    ),
+                  ];
+                })
+              ],
             ),
             body: Form(
               key: formKey,

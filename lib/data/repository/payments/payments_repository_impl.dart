@@ -43,4 +43,11 @@ class PaymentsRepositoryProviderImpl implements PaymentsRepository {
         .doc(payment.id)
         .set(payment);
   }
+
+  @override
+  Future<void> deletePayment(Payment payment) async {
+    return getPaymentsRef(payment.group.copyWith(payments: []))
+        .doc(payment.id)
+        .delete();
+  }
 }

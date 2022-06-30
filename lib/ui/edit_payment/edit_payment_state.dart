@@ -7,6 +7,6 @@ class EditPaymentState with _$EditPaymentState {
   const factory EditPaymentState({
     @Default('') String name,
     @Default('') String price,
-    @Default(false) bool sending,
+    @Default(false) bool loading,
   }) = _EditPaymentState;
 }

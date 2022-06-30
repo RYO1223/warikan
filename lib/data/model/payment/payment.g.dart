@@ -11,6 +11,7 @@ _$_$payment _$$_$paymentFromJson(Map<String, dynamic> json) => _$_$payment(
       group: Group.fromJson(json['group'] as Map<String, dynamic>),
       name: json['name'] as String,
       price: json['price'] as int,
+      deleted: json['deleted'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_$paymentToJson(_$_$payment instance) =>
@@ -19,4 +20,5 @@ Map<String, dynamic> _$$_$paymentToJson(_$_$payment instance) =>
       'group': instance.group,
       'name': instance.name,
       'price': instance.price,
+      'deleted': instance.deleted,
     };

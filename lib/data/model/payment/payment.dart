@@ -14,6 +14,7 @@ class Payment with _$Payment {
     required Group group,
     required String name,
     required int price,
+    @Default(false) bool deleted,
   }) = _$payment;
 
   factory Payment.fromJson(Map<String, Object?> json) =>

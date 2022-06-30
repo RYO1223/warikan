@@ -50,6 +50,22 @@ class HomeViewModel extends StateNotifier<AsyncValue<HomeState>> {
         await router.push<Payment>(EditPaymentRoute(payment: originalPayment));
     if (newPayment == null) return;
 
+    if (newPayment.deleted) {
+      final newGroups = state.value!.groups.map((group) {
+        return group.copyWith(
+          payments: () {
+            final tmpPayments = group.payments.toList();
+            tmpPayments.removeWhere((payment) {
+              return payment.id == originalPayment.id;
+            });
+            return tmpPayments;
+          }(),
+        );
+      }).toList();
+      state = AsyncValue.data(HomeState(groups: newGroups));
+      return;
+    }
+
     final newGroups = state.value!.groups.map((group) {
       return group.copyWith(
         payments: group.payments.map((payment) {

@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$EditPaymentState {
   String get name => throw _privateConstructorUsedError;
   String get price => throw _privateConstructorUsedError;
-  bool get sending => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditPaymentStateCopyWith<EditPaymentState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $EditPaymentStateCopyWith<$Res> {
   factory $EditPaymentStateCopyWith(
           EditPaymentState value, $Res Function(EditPaymentState) then) =
       _$EditPaymentStateCopyWithImpl<$Res>;
-  $Res call({String name, String price, bool sending});
+  $Res call({String name, String price, bool loading});
 }
 
 /// @nodoc
@@ -46,7 +46,7 @@ class _$EditPaymentStateCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? price = freezed,
-    Object? sending = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -57,9 +57,9 @@ class _$EditPaymentStateCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
-      sending: sending == freezed
-          ? _value.sending
-          : sending // ignore: cast_nullable_to_non_nullable
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -72,7 +72,7 @@ abstract class _$$_EditPaymentStateCopyWith<$Res>
           _$_EditPaymentState value, $Res Function(_$_EditPaymentState) then) =
       __$$_EditPaymentStateCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String price, bool sending});
+  $Res call({String name, String price, bool loading});
 }
 
 /// @nodoc
@@ -90,7 +90,7 @@ class __$$_EditPaymentStateCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? price = freezed,
-    Object? sending = freezed,
+    Object? loading = freezed,
   }) {
     return _then(_$_EditPaymentState(
       name: name == freezed
@@ -101,9 +101,9 @@ class __$$_EditPaymentStateCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as String,
-      sending: sending == freezed
-          ? _value.sending
-          : sending // ignore: cast_nullable_to_non_nullable
+      loading: loading == freezed
+          ? _value.loading
+          : loading // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -113,7 +113,7 @@ class __$$_EditPaymentStateCopyWithImpl<$Res>
 
 class _$_EditPaymentState implements _EditPaymentState {
   const _$_EditPaymentState(
-      {this.name = '', this.price = '', this.sending = false});
+      {this.name = '', this.price = '', this.loading = false});
 
   @override
   @JsonKey()
@@ -123,11 +123,11 @@ class _$_EditPaymentState implements _EditPaymentState {
   final String price;
   @override
   @JsonKey()
-  final bool sending;
+  final bool loading;
 
   @override
   String toString() {
-    return 'EditPaymentState(name: $name, price: $price, sending: $sending)';
+    return 'EditPaymentState(name: $name, price: $price, loading: $loading)';
   }
 
   @override
@@ -137,7 +137,7 @@ class _$_EditPaymentState implements _EditPaymentState {
             other is _$_EditPaymentState &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.sending, sending));
+            const DeepCollectionEquality().equals(other.loading, loading));
   }
 
   @override
@@ -145,7 +145,7 @@ class _$_EditPaymentState implements _EditPaymentState {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(sending));
+      const DeepCollectionEquality().hash(loading));
 
   @JsonKey(ignore: true)
   @override
@@ -157,14 +157,14 @@ abstract class _EditPaymentState implements EditPaymentState {
   const factory _EditPaymentState(
       {final String name,
       final String price,
-      final bool sending}) = _$_EditPaymentState;
+      final bool loading}) = _$_EditPaymentState;
 
   @override
   String get name => throw _privateConstructorUsedError;
   @override
   String get price => throw _privateConstructorUsedError;
   @override
-  bool get sending => throw _privateConstructorUsedError;
+  bool get loading => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_EditPaymentStateCopyWith<_$_EditPaymentState> get copyWith =>

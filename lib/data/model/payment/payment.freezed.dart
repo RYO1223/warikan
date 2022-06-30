@@ -24,6 +24,7 @@ mixin _$Payment {
   Group get group => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
+  bool get deleted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ mixin _$Payment {
 abstract class $PaymentCopyWith<$Res> {
   factory $PaymentCopyWith(Payment value, $Res Function(Payment) then) =
       _$PaymentCopyWithImpl<$Res>;
-  $Res call({String id, Group group, String name, int price});
+  $Res call({String id, Group group, String name, int price, bool deleted});
 
   $GroupCopyWith<$Res> get group;
 }
@@ -53,6 +54,7 @@ class _$PaymentCopyWithImpl<$Res> implements $PaymentCopyWith<$Res> {
     Object? group = freezed,
     Object? name = freezed,
     Object? price = freezed,
+    Object? deleted = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -71,6 +73,10 @@ class _$PaymentCopyWithImpl<$Res> implements $PaymentCopyWith<$Res> {
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
+      deleted: deleted == freezed
+          ? _value.deleted
+          : deleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -88,7 +94,7 @@ abstract class _$$_$paymentCopyWith<$Res> implements $PaymentCopyWith<$Res> {
           _$_$payment value, $Res Function(_$_$payment) then) =
       __$$_$paymentCopyWithImpl<$Res>;
   @override
-  $Res call({String id, Group group, String name, int price});
+  $Res call({String id, Group group, String name, int price, bool deleted});
 
   @override
   $GroupCopyWith<$Res> get group;
@@ -110,6 +116,7 @@ class __$$_$paymentCopyWithImpl<$Res> extends _$PaymentCopyWithImpl<$Res>
     Object? group = freezed,
     Object? name = freezed,
     Object? price = freezed,
+    Object? deleted = freezed,
   }) {
     return _then(_$_$payment(
       id: id == freezed
@@ -128,6 +135,10 @@ class __$$_$paymentCopyWithImpl<$Res> extends _$PaymentCopyWithImpl<$Res>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as int,
+      deleted: deleted == freezed
+          ? _value.deleted
+          : deleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -139,7 +150,8 @@ class _$_$payment extends _$payment {
       {required this.id,
       required this.group,
       required this.name,
-      required this.price})
+      required this.price,
+      this.deleted = false})
       : super._();
 
   factory _$_$payment.fromJson(Map<String, dynamic> json) =>
@@ -153,10 +165,13 @@ class _$_$payment extends _$payment {
   final String name;
   @override
   final int price;
+  @override
+  @JsonKey()
+  final bool deleted;
 
   @override
   String toString() {
-    return 'Payment(id: $id, group: $group, name: $name, price: $price)';
+    return 'Payment(id: $id, group: $group, name: $name, price: $price, deleted: $deleted)';
   }
 
   @override
@@ -167,7 +182,8 @@ class _$_$payment extends _$payment {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.group, group) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.price, price));
+            const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.deleted, deleted));
   }
 
   @JsonKey(ignore: true)
@@ -177,7 +193,8 @@ class _$_$payment extends _$payment {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(group),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(price));
+      const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(deleted));
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +212,8 @@ abstract class _$payment extends Payment {
       {required final String id,
       required final Group group,
       required final String name,
-      required final int price}) = _$_$payment;
+      required final int price,
+      final bool deleted}) = _$_$payment;
   const _$payment._() : super._();
 
   factory _$payment.fromJson(Map<String, dynamic> json) = _$_$payment.fromJson;
@@ -208,6 +226,8 @@ abstract class _$payment extends Payment {
   String get name => throw _privateConstructorUsedError;
   @override
   int get price => throw _privateConstructorUsedError;
+  @override
+  bool get deleted => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_$paymentCopyWith<_$_$payment> get copyWith =>

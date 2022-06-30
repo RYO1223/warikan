@@ -15,7 +15,8 @@ class editPaymentViewModel extends StateNotifier<EditPaymentState> {
   editPaymentViewModel({
     required this.ref,
     required Payment payment,
-  }) : super(
+  })  : paymentsRepository = ref.watch(paymentsRepositoryProvider),
+        super(
           EditPaymentState(
             name: payment.name,
             price: payment.price.toString(),
@@ -23,6 +24,8 @@ class editPaymentViewModel extends StateNotifier<EditPaymentState> {
         );
 
   final StateNotifierProviderRef<editPaymentViewModel, EditPaymentState> ref;
+
+  final PaymentsRepositoryProviderImpl paymentsRepository;
 
   void setName(String name) {
     state = state.copyWith(name: name);
@@ -57,12 +60,11 @@ class editPaymentViewModel extends StateNotifier<EditPaymentState> {
     if (formKey.currentState!.validate()) {
       final router = AutoRouter.of(context);
 
-      state = state.copyWith(sending: true);
+      state = state.copyWith(loading: true);
       final payment = originalPayment.copyWith(
         name: state.name,
         price: int.parse(state.price),
       );
-      final paymentsRepository = ref.watch(paymentsRepositoryProvider);
 
       paymentsRepository.editPayment(payment).then((data) {
         router.pop<Payment>(payment);
@@ -72,8 +74,23 @@ class editPaymentViewModel extends StateNotifier<EditPaymentState> {
           builder: (context) => ErrorDialog(error: error),
         );
       }).whenComplete(() {
-        state = state.copyWith(sending: false);
+        state = state.copyWith(loading: false);
       });
     }
+  }
+
+  void onDeleteTap({
+    required BuildContext context,
+    required Payment payment,
+  }) {
+    final router = AutoRouter.of(context);
+
+    state = state.copyWith(loading: true);
+
+    paymentsRepository.deletePayment(payment).then((value) {
+      router.pop<Payment>(payment.copyWith(deleted: true));
+    }).whenComplete(() {
+      state = state.copyWith(loading: false);
+    });
   }
 }
