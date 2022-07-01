@@ -5,6 +5,10 @@ import 'package:warikan/data/model/group/group.dart';
 part 'payment.freezed.dart';
 part 'payment.g.dart';
 
+DateTime fromTimestampToDateTime(Timestamp timestamp) => timestamp.toDate();
+Timestamp fromDateTimeToTimestamp(DateTime dateTime) =>
+    Timestamp.fromDate(dateTime);
+
 @freezed
 class Payment with _$Payment {
   const Payment._();
@@ -14,7 +18,18 @@ class Payment with _$Payment {
     required Group group,
     required String name,
     required int price,
-    @Default(false) bool deleted,
+    @Default(false)
+        bool deleted,
+    @JsonKey(
+      fromJson: fromTimestampToDateTime,
+      toJson: fromDateTimeToTimestamp,
+    )
+        required DateTime createdAt,
+    @JsonKey(
+      fromJson: fromTimestampToDateTime,
+      toJson: fromDateTimeToTimestamp,
+    )
+        required DateTime updatedAt,
   }) = _$payment;
 
   factory Payment.fromJson(Map<String, Object?> json) =>
@@ -25,11 +40,10 @@ class Payment with _$Payment {
     SnapshotOptions? options,
     Group group,
   ) {
-    return Payment.fromJson(
-      snapshot.data()!
-        ..['id'] = snapshot.id
-        ..['group'] = group.toJson(),
-    );
+    return Payment.fromJson(snapshot.data()!
+      ..['id'] = snapshot.id
+      ..['group'] = group.toJson()
+      ..['createdAt'] = snapshot.data()!['createdAt']);
   }
 
   Map<String, Object?> toFirestore(SetOptions? options) {

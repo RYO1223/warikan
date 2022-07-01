@@ -56,6 +56,8 @@ class AddPaymentViewModel extends StateNotifier<AddPaymentState> {
         group: group,
         name: state.name,
         price: int.parse(state.price),
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
       );
       final paymentsRepository = ref.watch(paymentsRepositoryProvider);
 

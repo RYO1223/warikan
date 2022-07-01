@@ -25,6 +25,10 @@ mixin _$Payment {
   String get name => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   bool get deleted => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +39,16 @@ mixin _$Payment {
 abstract class $PaymentCopyWith<$Res> {
   factory $PaymentCopyWith(Payment value, $Res Function(Payment) then) =
       _$PaymentCopyWithImpl<$Res>;
-  $Res call({String id, Group group, String name, int price, bool deleted});
+  $Res call(
+      {String id,
+      Group group,
+      String name,
+      int price,
+      bool deleted,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          DateTime createdAt,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          DateTime updatedAt});
 
   $GroupCopyWith<$Res> get group;
 }
@@ -55,6 +68,8 @@ class _$PaymentCopyWithImpl<$Res> implements $PaymentCopyWith<$Res> {
     Object? name = freezed,
     Object? price = freezed,
     Object? deleted = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -77,6 +92,14 @@ class _$PaymentCopyWithImpl<$Res> implements $PaymentCopyWith<$Res> {
           ? _value.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 
@@ -94,7 +117,16 @@ abstract class _$$_$paymentCopyWith<$Res> implements $PaymentCopyWith<$Res> {
           _$_$payment value, $Res Function(_$_$payment) then) =
       __$$_$paymentCopyWithImpl<$Res>;
   @override
-  $Res call({String id, Group group, String name, int price, bool deleted});
+  $Res call(
+      {String id,
+      Group group,
+      String name,
+      int price,
+      bool deleted,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          DateTime createdAt,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          DateTime updatedAt});
 
   @override
   $GroupCopyWith<$Res> get group;
@@ -117,6 +149,8 @@ class __$$_$paymentCopyWithImpl<$Res> extends _$PaymentCopyWithImpl<$Res>
     Object? name = freezed,
     Object? price = freezed,
     Object? deleted = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_$payment(
       id: id == freezed
@@ -139,6 +173,14 @@ class __$$_$paymentCopyWithImpl<$Res> extends _$PaymentCopyWithImpl<$Res>
           ? _value.deleted
           : deleted // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -151,7 +193,11 @@ class _$_$payment extends _$payment {
       required this.group,
       required this.name,
       required this.price,
-      this.deleted = false})
+      this.deleted = false,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          required this.createdAt,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          required this.updatedAt})
       : super._();
 
   factory _$_$payment.fromJson(Map<String, dynamic> json) =>
@@ -168,10 +214,16 @@ class _$_$payment extends _$payment {
   @override
   @JsonKey()
   final bool deleted;
+  @override
+  @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+  final DateTime createdAt;
+  @override
+  @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Payment(id: $id, group: $group, name: $name, price: $price, deleted: $deleted)';
+    return 'Payment(id: $id, group: $group, name: $name, price: $price, deleted: $deleted, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -183,7 +235,9 @@ class _$_$payment extends _$payment {
             const DeepCollectionEquality().equals(other.group, group) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.deleted, deleted));
+            const DeepCollectionEquality().equals(other.deleted, deleted) &&
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.updatedAt, updatedAt));
   }
 
   @JsonKey(ignore: true)
@@ -194,7 +248,9 @@ class _$_$payment extends _$payment {
       const DeepCollectionEquality().hash(group),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(deleted));
+      const DeepCollectionEquality().hash(deleted),
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(updatedAt));
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +269,11 @@ abstract class _$payment extends Payment {
       required final Group group,
       required final String name,
       required final int price,
-      final bool deleted}) = _$_$payment;
+      final bool deleted,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          required final DateTime createdAt,
+      @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+          required final DateTime updatedAt}) = _$_$payment;
   const _$payment._() : super._();
 
   factory _$payment.fromJson(Map<String, dynamic> json) = _$_$payment.fromJson;
@@ -228,6 +288,12 @@ abstract class _$payment extends Payment {
   int get price => throw _privateConstructorUsedError;
   @override
   bool get deleted => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(fromJson: fromTimestampToDateTime, toJson: fromDateTimeToTimestamp)
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_$paymentCopyWith<_$_$payment> get copyWith =>

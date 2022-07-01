@@ -12,6 +12,8 @@ _$_$payment _$$_$paymentFromJson(Map<String, dynamic> json) => _$_$payment(
       name: json['name'] as String,
       price: json['price'] as int,
       deleted: json['deleted'] as bool? ?? false,
+      createdAt: fromTimestampToDateTime(json['createdAt'] as Timestamp),
+      updatedAt: fromTimestampToDateTime(json['updatedAt'] as Timestamp),
     );
 
 Map<String, dynamic> _$$_$paymentToJson(_$_$payment instance) =>
@@ -21,4 +23,6 @@ Map<String, dynamic> _$$_$paymentToJson(_$_$payment instance) =>
       'name': instance.name,
       'price': instance.price,
       'deleted': instance.deleted,
+      'createdAt': fromDateTimeToTimestamp(instance.createdAt),
+      'updatedAt': fromDateTimeToTimestamp(instance.updatedAt),
     };
