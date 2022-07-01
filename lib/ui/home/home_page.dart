@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:warikan/data/model/group/group.dart';
 import 'package:warikan/ui/home/home_view_model.dart';
 import 'package:warikan/ui/shared/drawer.dart';
@@ -68,9 +69,12 @@ class PaymentList extends ConsumerWidget {
       itemCount: group.payments.length,
       itemBuilder: (context, index) {
         final payment = group.payments[index];
+        final dateFormatter = DateFormat('yyyy/MM/dd');
         return ListTile(
           title: Text(payment.name),
-          subtitle: Text(payment.price.toString()),
+          subtitle: Text(
+              '${payment.price.toString()}円\n${dateFormatter.format(payment.createdAt)}'),
+          isThreeLine: true,
           onTap: () => viewModel.onPaymentTap(
             context: context,
             originalPayment: payment,
