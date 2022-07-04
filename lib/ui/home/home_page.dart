@@ -39,7 +39,7 @@ class HomePage extends HookConsumerWidget {
           body: TabBarView(
             controller: tabController,
             children: data.groups
-                .map<Widget>((group) => PaymentList(group: group))
+                .map<Widget>((group) => HomePageBody(group: group))
                 .toList()
               ..add(const Text('')),
           ),
@@ -57,31 +57,45 @@ class HomePage extends HookConsumerWidget {
   }
 }
 
-class PaymentList extends ConsumerWidget {
-  const PaymentList({Key? key, required this.group}) : super(key: key);
+class HomePageBody extends ConsumerWidget {
+  const HomePageBody({Key? key, required this.group}) : super(key: key);
 
   final Group group;
 
   @override
   Widget build(context, ref) {
     final viewModel = ref.watch(homeViewModelProvider.notifier);
-    return ListView.separated(
-      itemCount: group.payments.length,
-      itemBuilder: (context, index) {
-        final payment = group.payments[index];
-        final dateFormatter = DateFormat('yyyy/MM/dd');
-        return ListTile(
-          title: Text(payment.name),
-          subtitle: Text(
-              '${payment.price.toString()}円\n${dateFormatter.format(payment.createdAt)}'),
-          isThreeLine: true,
-          onTap: () => viewModel.onPaymentTap(
-            context: context,
-            originalPayment: payment,
-          ),
-        );
-      },
-      separatorBuilder: (context, index) => const Divider(color: Colors.grey),
+
+    final totalPrice = group.payments
+        .map((e) => e.price)
+        .reduce((value, element) => value + element);
+    final dateFormatter = DateFormat('yyyy/MM/dd');
+
+    return ListView(
+      children: [
+        ListTile(title: Text('合計金額: $totalPrice円')),
+        const Divider(color: Colors.grey),
+        ...() {
+          return group.payments
+              .map<List<Widget>>((payment) {
+                return [
+                  ListTile(
+                    title: Text(payment.name),
+                    subtitle: Text(
+                        '${payment.price.toString()}円\n${dateFormatter.format(payment.createdAt)}'),
+                    isThreeLine: true,
+                    onTap: () => viewModel.onPaymentTap(
+                      context: context,
+                      originalPayment: payment,
+                    ),
+                  ),
+                  const Divider(color: Colors.grey),
+                ];
+              })
+              .expand((e) => e)
+              .toList();
+        }(),
+      ],
     );
   }
 }
